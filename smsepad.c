@@ -56,7 +56,7 @@
 
 /* Data */
 
-static char g_pressed[9];
+static char g_keyval[9];
 static char g_keymap[10] = "wsadqke0l";
 
 /* Functions */
@@ -64,7 +64,7 @@ static char g_keymap[10] = "wsadqke0l";
 static inline int pad_pressed(int key)
 {
     assert(key < 9);
-    return !g_pressed[key];
+    return !g_keyval[key];
 }
 
 static void pad_setup(void)
@@ -90,24 +90,22 @@ static void pad_setup(void)
     /* Wait for stabilization of signals */
     delayMicroseconds(10);
 
-    /*
     pinMode(PAD_GND_PIN, OUTPUT);
     digitalWrite(PAD_GND_PIN, 0);
     delayMicroseconds(10);
-     */
 }
 
 static void pad_read(void)
 {
-    g_pressed[PAD_UP] = digitalRead(PAD_UP_PIN);
-    g_pressed[PAD_DOWN] = digitalRead(PAD_DOWN_PIN);
-    g_pressed[PAD_LEFT] = digitalRead(PAD_LEFT_PIN);
-    g_pressed[PAD_RIGHT] = digitalRead(PAD_RIGHT_PIN);
-    g_pressed[PAD_XYZ] = 0;
-    g_pressed[PAD_BUTTON1] = digitalRead(PAD_BUTTON1_PIN);
-    g_pressed[PAD_START] = digitalRead(PAD_START_PIN);
-    g_pressed[PAD_GND] = 1;
-    g_pressed[PAD_BUTTON2] = digitalRead(PAD_BUTTON2_PIN);
+    g_keyval[PAD_UP] = digitalRead(PAD_UP_PIN);
+    g_keyval[PAD_DOWN] = digitalRead(PAD_DOWN_PIN);
+    g_keyval[PAD_LEFT] = digitalRead(PAD_LEFT_PIN);
+    g_keyval[PAD_RIGHT] = digitalRead(PAD_RIGHT_PIN);
+    g_keyval[PAD_XYZ] = 1;
+    g_keyval[PAD_BUTTON1] = digitalRead(PAD_BUTTON1_PIN);
+    g_keyval[PAD_START] = digitalRead(PAD_START_PIN);
+    g_keyval[PAD_GND] = 1;
+    g_keyval[PAD_BUTTON2] = digitalRead(PAD_BUTTON2_PIN);
 }
 
 static void pad_print(void)

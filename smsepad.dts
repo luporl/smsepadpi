@@ -1,0 +1,52 @@
+/dts-v1/;
+/plugin/;
+/ {
+   compatible = "brcm,bcm2835";         // RPi3
+
+   fragment@0 {
+      target-path = "/";
+      __overlay__ {
+         keypad: smsepad {
+            compatible = "gpio-keys";
+            // #address-cells = <1>;
+            // #size-cells = <0>;
+            autorepeat;
+            button@9 {
+               label = "up";
+               linux,code = <17>;       // W
+               gpios = <&gpio 9 1>;
+            };
+            button@25 {
+               label = "down";
+               linux,code = <31>;       // S
+               gpios = <&gpio 25 1>;
+            };
+            button@11 {
+               label = "left";
+               linux,code = <30>;       // A
+               gpios = <&gpio 11 1>;
+            };
+            button@8 {
+               label = "right";
+               linux,code = <32>;       // D
+               gpios = <&gpio 8 1>;
+            };
+            button@7 {
+               label = "button1";
+               linux,code = <37>;       // K
+               gpios = <&gpio 7 1>;
+            };
+            button@0 {
+               label = "start";
+               linux,code = <28>;       // ENTER
+               gpios = <&gpio 0 1>;
+            };
+            button@5 {
+               label = "button2";
+               linux,code = <38>;       // L
+               gpios = <&gpio 5 1>;
+            };
+         };
+      };
+   };
+};

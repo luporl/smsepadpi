@@ -7,7 +7,7 @@ all: smsepad smsepad.dtbo
 smsepad: smsepad.o
 	$(CC) -o $@ $< -lwiringPi
 
-smsepad.dtbo: smspad.dts
+smsepad.dtbo: smsepad.dts
 	dtc -I dts -O dtb -o smsepad.dtbo smsepad.dts
 
 tags:

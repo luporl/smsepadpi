@@ -8,43 +8,47 @@
       __overlay__ {
          keypad: smsepad {
             compatible = "gpio-keys";
-            // #address-cells = <1>;
-            // #size-cells = <0>;
-            autorepeat;
-            button@9 {
+            // autorepeat;
+            button@1 {
                label = "up";
                linux,code = <17>;       // W
-               gpios = <&gpio 9 1>;
+               gpios = <&gpio 5 17>;
             };
-            button@25 {
+            button@2 {
                label = "down";
                linux,code = <31>;       // S
-               gpios = <&gpio 25 1>;
+               gpios = <&gpio 12 17>;
             };
-            button@11 {
+            button@3 {
                label = "left";
                linux,code = <30>;       // A
-               gpios = <&gpio 11 1>;
+               gpios = <&gpio 6 17>;
             };
-            button@8 {
+            button@4 {
                label = "right";
                linux,code = <32>;       // D
-               gpios = <&gpio 8 1>;
-            };
-            button@7 {
-               label = "button1";
-               linux,code = <37>;       // K
-               gpios = <&gpio 7 1>;
-            };
-            button@0 {
-               label = "start";
-               linux,code = <28>;       // ENTER
-               gpios = <&gpio 0 1>;
+               gpios = <&gpio 16 17>;
             };
             button@5 {
+               label = "reset";
+               linux,code = <16>;       // Q
+               gpios = <&gpio 13 17>;
+            };
+            button@6 {
+               label = "button1";
+               linux,code = <37>;       // K
+               gpios = <&gpio 20 17>;
+            };
+            button@7 {
+               label = "start";
+               linux,code = <28>;       // ENTER
+               gpios = <&gpio 19 17>;
+            };
+            // pin@8 = gnd
+            button@9 {
                label = "button2";
                linux,code = <38>;       // L
-               gpios = <&gpio 5 1>;
+               gpios = <&gpio 26 17>;
             };
          };
       };

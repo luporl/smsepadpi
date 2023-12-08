@@ -10,11 +10,6 @@
 
 /* Macros */
 
-/* Enable debug */
-#define DEBUG           1
-
-#define BIT(n)          (1 << (n))
-
 /*
  * _____________________
  * | 1 | 3 | 5 | 7 | 9 |
@@ -43,21 +38,22 @@
 #define PAD_GND         7
 #define PAD_BUTTON2     8
 
-#define PAD_UP_PIN      13
-#define PAD_DOWN_PIN    6
-#define PAD_LEFT_PIN    14
-#define PAD_RIGHT_PIN   10
-#define PAD_XYZ_PIN     -1 /* (GND) */
-#define PAD_BUTTON1_PIN 11
-#define PAD_START_PIN   30
-#define PAD_GND_PIN     31
-#define PAD_BUTTON2_PIN 21
+/* NOTE: wiringPi pin numbering */
+#define PAD_UP_PIN      5
+#define PAD_DOWN_PIN    12
+#define PAD_LEFT_PIN    6
+#define PAD_RIGHT_PIN   16
+#define PAD_XYZ_PIN     13
+#define PAD_BUTTON1_PIN 20
+#define PAD_START_PIN   19
+#define PAD_BUTTON2_PIN 26
 
 
 /* Data */
 
 static char g_keyval[9];
 static char g_keymap[10] = "wsadqke0l";
+
 
 /* Functions */
 
@@ -73,25 +69,21 @@ static void pad_setup(void)
     pinMode(PAD_DOWN_PIN, INPUT);
     pinMode(PAD_LEFT_PIN, INPUT);
     pinMode(PAD_RIGHT_PIN, INPUT);
+    pinMode(PAD_XYZ_PIN, INPUT);
     pinMode(PAD_BUTTON1_PIN, INPUT);
     pinMode(PAD_START_PIN, INPUT);
-    pinMode(PAD_GND_PIN, INPUT);
     pinMode(PAD_BUTTON2_PIN, INPUT);
 
     pullUpDnControl(PAD_UP_PIN, PUD_UP);
     pullUpDnControl(PAD_DOWN_PIN, PUD_UP);
     pullUpDnControl(PAD_LEFT_PIN, PUD_UP);
     pullUpDnControl(PAD_RIGHT_PIN, PUD_UP);
+    pullUpDnControl(PAD_XYZ_PIN, PUD_UP);
     pullUpDnControl(PAD_BUTTON1_PIN, PUD_UP);
     pullUpDnControl(PAD_START_PIN, PUD_UP);
-    pullUpDnControl(PAD_GND_PIN, PUD_DOWN);
     pullUpDnControl(PAD_BUTTON2_PIN, PUD_UP);
 
     /* Wait for stabilization of signals */
-    delayMicroseconds(10);
-
-    pinMode(PAD_GND_PIN, OUTPUT);
-    digitalWrite(PAD_GND_PIN, 0);
     delayMicroseconds(10);
 }
 
@@ -101,10 +93,9 @@ static void pad_read(void)
     g_keyval[PAD_DOWN] = digitalRead(PAD_DOWN_PIN);
     g_keyval[PAD_LEFT] = digitalRead(PAD_LEFT_PIN);
     g_keyval[PAD_RIGHT] = digitalRead(PAD_RIGHT_PIN);
-    g_keyval[PAD_XYZ] = 1;
+    g_keyval[PAD_XYZ] = digitalRead(PAD_XYZ_PIN);
     g_keyval[PAD_BUTTON1] = digitalRead(PAD_BUTTON1_PIN);
     g_keyval[PAD_START] = digitalRead(PAD_START_PIN);
-    g_keyval[PAD_GND] = 1;
     g_keyval[PAD_BUTTON2] = digitalRead(PAD_BUTTON2_PIN);
 }
 
@@ -128,13 +119,15 @@ int main()
     }
 
     pad_setup();
+    /* Specify gamepad's GND pin (8) as never pressed */
+    g_keyval[PAD_GND] = 1;
 
     printf("SMSE Pad on Pi started\n");
 
     while (1) {
         pad_read();
         pad_print();
-        delay(1000);    /* ms */
+        delay(500);	/* ms */
     }
     return 0;
 }

@@ -39,14 +39,14 @@
 #define PAD_BUTTON2     8
 
 /* NOTE: wiringPi pin numbering */
-#define PAD_UP_PIN      5
-#define PAD_DOWN_PIN    12
-#define PAD_LEFT_PIN    6
-#define PAD_RIGHT_PIN   16
-#define PAD_XYZ_PIN     13
-#define PAD_BUTTON1_PIN 20
-#define PAD_START_PIN   19
-#define PAD_BUTTON2_PIN 26
+#define PAD_UP_PIN      21  /* GPIO.5  */
+#define PAD_DOWN_PIN    26  /* GPIO.12 */
+#define PAD_LEFT_PIN    22  /* GPIO.6  */
+#define PAD_RIGHT_PIN   27  /* GPIO.16 */
+#define PAD_XYZ_PIN     23  /* GPIO.13 */
+#define PAD_BUTTON1_PIN 28  /* GPIO.20 */
+#define PAD_START_PIN   24  /* GPIO.19 */
+#define PAD_BUTTON2_PIN 25  /* GPIO.26 */
 
 
 /* Data */

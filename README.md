@@ -55,8 +55,7 @@ The Modu connector that I used has the following layout, when viewed from the to
 
 ## Installation
 
-Installation is very easy.
-To build the DTB overlay and the test program, just type:
+First, you need to build the DTB overlay and (optionally) the test program:
 ```
 make
 ```
@@ -73,7 +72,7 @@ dtoverlay=smsepad
 ```
 
 That's it. Save, reboot and the gamepad should be detected and loaded automatically, but as a keyboard.
-These is the mapping between the keyboard and the gamepad:
+This is the mapping between the keyboard and the gamepad:
 
 ```
 UP          W
